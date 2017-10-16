@@ -1,0 +1,1 @@
+# cryptonote-pool-docker
