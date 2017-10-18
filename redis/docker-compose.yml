@@ -1,0 +1,15 @@
+version: '3'
+services:
+  aeon-redis:
+    container_name: aeon-redis
+    build: .
+    volumes:
+      - redis-data-aeon:/data
+
+volumes:
+  redis-data-aeon:
+
+networks:
+  default:
+    external:
+      name: "crypto-pool-net"

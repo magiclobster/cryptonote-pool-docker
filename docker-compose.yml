@@ -1,0 +1,93 @@
+version: '3'
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: nginx
+    environment:
+      NGINX_HOST: magiclobster.de
+    networks:
+      - crypto-pool-net
+
+  aeon-redis:
+    build:
+      context: redis
+    container_name: aeon-redis
+    volumes:
+      - redis-data-aeon:/data
+    networks:
+      - crypto-pool-net
+
+  aeon-wallet:
+    build:
+      context: wallet
+      args:
+        - GIT_TAG=v0.9.14.0
+        - GIT_REPO=https://github.com/aeonix/aeon.git
+        - WALLET_BIN=simplewallet
+        - WALLET_DAEMON_BIN=aeond
+    container_name: aeon-wallet
+    environment:
+        - WALLET_NAME=pool.bin
+        - WALLET_PASSWORD=""
+        - WALLET_PORT=11188
+        - WALLETD_PORT=11181
+    volumes:
+      - wallet-data-aeon:/wallet
+    networks:
+      - crypto-pool-net
+
+  aeon-pool:
+    build:
+      context: pool
+    container_name: aeon-pool
+    depends_on:
+      - aeon-redis
+      - aeon-wallet
+    environment:
+      - POOL_WALLET_ADDRESS=wallet
+      - POOL_API_PASSWORD=pass
+      - POOL_HOST=aeon.magiclobster.de
+      - POOL_API=https:\/\/aeon.magiclobster.de:8119
+      - MAIL_ADDRESS=magiclobster@mailbox.org
+    networks:
+      - crypto-pool-net
+
+  haproxy:
+    build:
+      context: haproxy
+    container_name: haproxy
+    depends_on:
+      - aeon-pool
+      - nginx
+    ports:
+      - "80:80"
+      - "443:443"
+      - "3333:3333"
+      - "3334:3334"
+      - "3335:3335"
+      - "3336:3336"
+      - "8119:8119"
+      - "9999:9999"
+    volumes:
+      - haproxy-data:/etc/letsencrypt
+    environment:
+      - HAPROXY_STATS_PASSWORD=pass
+      - AEON_WEB_DOMAIN=aeon.magiclobster.de
+      - AEON_PORT_LOW=3333
+      - AEON_PORT_MED=3334
+      - AEON_PORT_HIG=3335
+      - AEON_PORT_EXT=3336
+      - AEON_API_PORT=8119
+    networks:
+      - crypto-pool-net
+
+volumes:
+  wallet-data-aeon:
+  redis-data-aeon:
+  pool-data-aeon:
+  haproxy-data:
+
+networks:
+  crypto-pool-net:
+    external: true

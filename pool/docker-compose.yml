@@ -1,0 +1,16 @@
+version: '3'
+services:
+  aeon-pool:
+    build: .
+    container_name: aeon-pool
+    environment:
+      - POOL_WALLET_ADDRESS=Wms4HR1NicGRDvqbM2hn3cAZusERghU93ejuftvGLz7q6Pi9EsqzEZLXjmkCqDBs7r76ukDDKtVAK6ekyuNxwxSn2vG6g1vkt
+      - POOL_API_PASSWORD=password
+      - POOL_HOST=aeon.magiclobster.de
+      - POOL_API=https:\/\/helios.no-typewriter.de:8119
+      - MAIL_ADDRESS=magiclobster@mailbox.org
+
+networks:
+  default:
+    external:
+      name: "crypto-pool-net"

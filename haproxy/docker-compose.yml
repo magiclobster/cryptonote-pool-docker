@@ -1,0 +1,28 @@
+version: '3'
+services:
+  haproxy:
+    build: .
+    container_name: haproxy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8119:8119"
+      - "9999:9999"
+    volumes:
+      - haproxy-data:/etc/letsencrypt
+    environment:
+      - HAPROXY_STATS_PASSWORD=readme
+      - AEON_WEB_DOMAIN=aeon.magiclobster.de
+      - AEON_PORT_LOW=3333
+      - AEON_PORT_MED=3334
+      - AEON_PORT_HIG=3335
+      - AEON_PORT_EXT=3336
+      - AEON_API_PORT=8119
+
+volumes:
+  haproxy-data:
+
+networks:
+  default:
+    external:
+      name: "crypto-pool-net"

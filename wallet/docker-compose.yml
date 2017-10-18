@@ -11,7 +11,7 @@ services:
     container_name: aeon-wallet
     environment:
         - WALLET_NAME=pool.bin
-        - WALLET_PASSWORD=pass
+        - WALLET_PASSWORD=""
         - WALLET_PORT=11188
         - WALLETD_PORT=11181
     volumes:
@@ -19,3 +19,8 @@ services:
    
 volumes:
   wallet-data-aeon: 
+
+networks:
+  default:
+    external:
+      name: "crypto-pool-net"
