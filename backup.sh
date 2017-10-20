@@ -5,4 +5,4 @@ BACKUP_PATH="~/crypto-pool-data/"
 mkdir -p ${BACKUP_PATH}{redis,wallet}
 
 docker cp aeon-redis:/data/dump.rdb ${BACKUP_PATH}/redis
-docker cp aeon-wallet:/wallet/pool.* ${BACKUP_PATH}/wallet
+docker exec -it aeon-wallet ./get_seed.sh > ${BACKUP_PATH}/wallet
