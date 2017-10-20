@@ -19,6 +19,6 @@ RUN mkdir -p /wallet/data && mkdir /build && git clone --branch ${GIT_TAG} ${GIT
 	&& rm -rf /build
 
 COPY docker-entrypoint.sh /
-COPY wallet /usr/local/bin/
+COPY wallet get_seed.sh /usr/local/bin/get_seed
 WORKDIR /wallet
 ENTRYPOINT ["/docker-entrypoint.sh"]
