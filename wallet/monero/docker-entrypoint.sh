@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+sleep infinity
+
 if [ ! -f /wallet/${WALLET_NAME} ]; then
-    echo "wallet not found, creating new wallet"
+    echo "wallet.sh not found, creating new wallet.sh"
     echo "exit" | /wallet/wallet --generate-new-wallet ${WALLET_NAME} --password ${WALLET_PASSWORD} > /dev/null &
     sleep 5
 fi

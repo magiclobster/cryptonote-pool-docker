@@ -1,0 +1,24 @@
+version: '3'
+services:
+  monero-wallet:
+    build:
+      context: .
+      args:
+        - GIT_TAG=v0.11.1.0
+        - GIT_REPO=https://github.com/monero-project/monero.git
+    container_name: monero-wallet
+    environment:
+        - WALLET_NAME=pool.bin
+        - WALLET_PASSWORD=""
+        - WALLET_PORT=11188
+        - WALLETD_PORT=11181
+    volumes:
+      - wallet-data-monero:/wallet
+   
+volumes:
+  wallet-data-monero: 
+
+networks:
+  default:
+    external:
+      name: "crypto-pool-net"
