@@ -11,7 +11,9 @@ services:
         - WALLET_NAME=pool.bin
         - WALLET_PASSWORD=""
         - WALLET_PORT=11188
-        - WALLETD_PORT=11181
+        - WALLETD_PORT=18081
+        - FORCE_BLOCKCHAIN_DOWNLOAD=false
+        - BLOCKCHAIN_URL=https://downloads.getmonero.org/blockchain.raw
     volumes:
       - wallet-data-monero:/wallet
    

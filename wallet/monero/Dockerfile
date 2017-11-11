@@ -18,19 +18,20 @@ RUN apt-get update && apt-get install -y \
 	libexpat1-dev \
 	libgtest-dev \
 	doxygen \
-	graphviz
+	graphviz \
+	libsodium-dev
 
 ARG GIT_REPO
 ARG GIT_TAG
 
 RUN cd /usr/src/gtest && cmake . && make && mv libg* /usr/lib/ \
 	&& mkdir /build && git clone ${GIT_REPO} /build && cd /build \
-	&& git checkout ${GIT_TAG} && make
+	&& git checkout -b ${GIT_TAG} \
+	&& mkdir -p build/release && cd build/release && cmake -D STATIC=ON -D ARCH="x86-64" -D BUILD_64=ON -D CMAKE_BUILD_TYPE=release ../.. && make
 
 FROM debian:stretch
 RUN mkdir -p /wallet/data
 COPY --from=0 /build/build/release/bin/ /usr/local/bin/
-COPY --from=0 /usr/lib/x86_64-linux-gnu/ /usr/lib/x86_64-linux-gnu/
 RUN apt-get update && apt-get --no-install-recommends -y install curl \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 COPY wallet.sh /usr/local/bin/wallet
