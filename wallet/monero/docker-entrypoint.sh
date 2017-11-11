@@ -14,4 +14,4 @@ if [ "${FORCE_BLOCKCHAIN_DOWNLOAD}" == "true" ]; then
 fi
 monerod --data-dir /wallet/data --rpc-bind-ip 0.0.0.0 --rpc-bind-port ${WALLETD_PORT} --log-file /wallet/walletd.log --confirm-external-bind --non-interactive --detach
 sleep 10
-exec monero-wallet-rpc --wallet-file /wallet/${WALLET_NAME} --password ${WALLET_PASSWORD} --daemon-address 127.0.0.1:${WALLETD_PORT} --rpc-bind-ip 0.0.0.0 --rpc-bind-port ${WALLET_PORT} --confirm-external-bind
+exec monero-wallet-rpc --wallet-file /wallet/${WALLET_NAME} --password ${WALLET_PASSWORD} --daemon-address 127.0.0.1:${WALLETD_PORT} --rpc-bind-ip 0.0.0.0 --rpc-bind-port ${WALLET_PORT} --confirm-external-bind --disable-rpc-login
