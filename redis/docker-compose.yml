@@ -1,13 +1,13 @@
 version: '3'
 services:
-  aeon-redis:
-    container_name: aeon-redis
+  cryptonote-redis:
+    container_name: cryptonote-redis
     build: .
     volumes:
-      - redis-data-aeon:/data
+      - redis-data-cryptonote:/data
 
 volumes:
-  redis-data-aeon:
+  redis-data-cryptonote:
 
 networks:
   default:

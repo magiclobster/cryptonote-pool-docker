@@ -9,7 +9,6 @@ services:
       - "3333:3333"
       - "3334:3334"
       - "3335:3335"
-      - "3336:3336"
       - "8117:8117"
       - "8119:8119"
       - "9999:9999"
@@ -18,11 +17,12 @@ services:
     environment:
       - HAPROXY_STATS_PASSWORD=readme
       - AEON_WEB_DOMAIN=aeon.magiclobster.de
-      - AEON_PORT_LOW=3333
-      - AEON_PORT_MED=3334
-      - AEON_PORT_HIG=3335
-      - AEON_PORT_EXT=3336
-      - AEON_API_PORT=8119
+      - MONERO_WEB_DOMAIN=monero.magiclobster.de
+      - MINER_PORT_LOW=3333
+      - MINER_PORT_MED=3334
+      - MINER_PORT_HIG=3335
+      - POOL_API_PORT=8117
+      - POOL_API_PORT_SSL=8119
 
 volumes:
   haproxy-data:

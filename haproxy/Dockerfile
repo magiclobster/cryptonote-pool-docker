@@ -16,6 +16,7 @@ RUN ln -s /cert_scripts/create_ss.sh /usr/local/bin/create_ss \
     && ln -s /cert_scripts/get_le.sh /usr/local/bin/get_le
     && ln -s /cert_scripts/recreate_certs.sh /usr/local/bin/recreate_certs
 
+COPY error.http /
 COPY haproxy.cfg /usr/local/etc/haproxy/
 COPY docker-entrypoint.sh /change-docker-entrypoint.sh
 

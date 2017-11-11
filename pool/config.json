@@ -1,6 +1,6 @@
 {
-    "coin": "aeon2",
-    "symbol": "AEON",
+    "coin": "°POOL_COIN°",
+    "symbol": "°POOL_SYMBOL°",
     "coinUnits": 1000000000000,
     "coinDifficultyTarget": 240,
 
@@ -91,7 +91,7 @@
         "enabled": true,
         "interval": 30,
         "depth": 60,
-        "poolFee": 0.7,
+        "poolFee": °POOL_FEE°,
         "devDonation": 0,
         "coreDevDonation": 0,
         "extraFeaturesDevDonation":0
@@ -109,17 +109,17 @@
     },
 
     "daemon": {
-        "host": "aeon-wallet",
-        "port": 11181
+        "host": "°DAEMON_HOST°",
+        "port": °DAEMON_PORT°
     },
 
     "wallet": {
-        "host": "aeon-wallet",
-        "port": 11188
+        "host": "°RPC_HOST°",
+        "port": °RPC_PORT°
     },
 
     "redis": {
-        "host": "aeon-redis",
+        "host": "°REDIS_HOST°",
         "port": 6379
     },
 

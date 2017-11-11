@@ -4,11 +4,37 @@ services:
     build: .
     container_name: aeon-pool
     environment:
+      - POOL_COIN=aeon2
+      - POOL_SYMBOL=AEON
+      - POOL_FEE=0.7
+      - DAEMON_HOST=aeon-wallet
+      - DAEMON_PORT=11181
+      - RPC_HOST=aeon-wallet
+      - RPC-PORT=11188
       - POOL_WALLET_ADDRESS=Wms4HR1NicGRDvqbM2hn3cAZusERghU93ejuftvGLz7q6Pi9EsqzEZLXjmkCqDBs7r76ukDDKtVAK6ekyuNxwxSn2vG6g1vkt
       - POOL_API_PASSWORD=password
       - POOL_HOST=aeon.magiclobster.de
-      - POOL_API=https:\/\/helios.no-typewriter.de:8119
+      - POOL_API=https:\/\/aeon.magiclobster.de:8119
+      - REDIS_HOST=cryptonote-redis
       - MAIL_ADDRESS=magiclobster@mailbox.org
+
+    monero-pool:
+      build: .
+      container_name: monero-pool
+      environment:
+        - POOL_COIN=monero
+        - POOL_SYMBOL=XMR
+        - POOL_FEE=0.7
+        - DAEMON_HOST=monero-wallet
+        - DAEMON_PORT=11181
+        - RPC_HOST=monero-wallet
+        - RPC-PORT=11188
+        - POOL_WALLET_ADDRESS=Wms4HR1NicGRDvqbM2hn3cAZusERghU93ejuftvGLz7q6Pi9EsqzEZLXjmkCqDBs7r76ukDDKtVAK6ekyuNxwxSn2vG6g1vkt
+        - POOL_API_PASSWORD=password
+        - POOL_HOST=monero.magiclobster.de
+        - POOL_API=https:\/\/monero.magiclobster.de:8119
+        - REDIS_HOST=cryptonote-redis
+        - MAIL_ADDRESS=magiclobster@mailbox.org
 
 networks:
   default:
