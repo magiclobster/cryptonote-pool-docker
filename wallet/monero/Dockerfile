@@ -1,35 +1,26 @@
-FROM debian:stretch
+FROM ubuntu:16.04
 LABEL maintainer="magiclobster@mailbox.org"
 
 RUN apt-get update && apt-get install -y \
-	git-core \
-	build-essential \
-	cmake \
-	libboost-all-dev \
-	libssl-dev \
-	pkg-config \
-	libzmq3-dev \
-	libunbound-dev \
-	libminiupnpc-dev \
-	libunwind8-dev \
-	liblzma-dev \
-	libreadline6-dev \
-	libldns-dev \
-	libexpat1-dev \
-	libgtest-dev \
-	doxygen \
-	graphviz \
-	libsodium-dev
+	ca-certificates \
+          cmake \
+          g++ \
+          git \
+          libboost1.58-all-dev \
+          libssl-dev \
+          libzmq3-dev \
+          libsodium-dev \
+          make \
+          pkg-config
 
 ARG GIT_REPO
 ARG GIT_TAG
 
-RUN cd /usr/src/gtest && cmake . && make && mv libg* /usr/lib/ \
-	&& mkdir /build && git clone ${GIT_REPO} /build && cd /build \
+RUN mkdir /build && git clone ${GIT_REPO} /build && cd /build \
 	&& git checkout -b ${GIT_TAG} \
-	&& mkdir -p build/release && cd build/release && cmake -D STATIC=ON -D ARCH="x86-64" -D BUILD_64=ON -D CMAKE_BUILD_TYPE=release ../.. && make
+	&& make release-static
 
-FROM debian:stretch
+FROM debian:stretch-slim
 RUN mkdir -p /wallet/data
 COPY --from=0 /build/build/release/bin/ /usr/local/bin/
 RUN apt-get update && apt-get --no-install-recommends -y install curl \

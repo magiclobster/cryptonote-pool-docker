@@ -14,9 +14,7 @@ ARG GIT_TAG
 RUN mkdir /build && git clone ${GIT_REPO} /build && cd build \
         git checkout -b ${GIT_TAG} && mkdir -p build/release && cd build/release && cmake -D STATIC=ON -D ARCH="x86-64" -D BUILD_64=ON -D CMAKE_BUILD_TYPE=release ../.. && make
 
-
-
-FROM debian:stretch
+FROM debian:stretch-slim
 COPY --from=0 /build/build/release/src/aeond /usr/local/bin/
 COPY --from=0 /build/build/release/src/simplewallet /usr/local/bin/
 COPY --from=0 /build/build/release/src/simpleminer /usr/local/bin/
