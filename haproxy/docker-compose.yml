@@ -14,8 +14,10 @@ services:
       - "9999:9999"
     volumes:
       - haproxy-data:/etc/letsencrypt
+    env_file: /$PWD/../crypto-pool-env
     environment:
       - HAPROXY_STATS_PASSWORD=readme
+      - HAPROXY_STATS_PORT=9999
       - AEON_WEB_DOMAIN=aeon.magiclobster.de
       - MONERO_WEB_DOMAIN=monero.magiclobster.de
       - MINER_PORT_LOW=3333

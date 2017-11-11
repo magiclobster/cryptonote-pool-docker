@@ -7,11 +7,11 @@ services:
         - GIT_TAG=v0.11.1.0
         - GIT_REPO=https://github.com/monero-project/monero.git
     container_name: monero-wallet
+    env_file: /$PWD/../../crypto-pool-env
     environment:
-        - WALLET_NAME=pool.bin
-        - WALLET_PASSWORD=""
         - WALLET_PORT=11188
-        - WALLETD_PORT=18081
+        - WALLETD_PORT=11181
+        - WALLET_NAME=pool.bin
         - FORCE_BLOCKCHAIN_DOWNLOAD=false
         - BLOCKCHAIN_URL=https://downloads.getmonero.org/blockchain.raw
     volumes:

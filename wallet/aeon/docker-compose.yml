@@ -7,11 +7,12 @@ services:
         - GIT_TAG=v0.9.14.0
         - GIT_REPO=https://github.com/aeonix/aeon.git
     container_name: aeon-wallet
+    env_file: /$PWD/../../crypto-pool-env
     environment:
-        - WALLET_NAME=pool.bin
-        - WALLET_PASSWORD=""
         - WALLET_PORT=11188
         - WALLETD_PORT=11181
+        - WALLET_NAME=pool.bin
+        - WALLET_PASSWORD=""
     volumes:
       - wallet-data-aeon:/wallet
    
