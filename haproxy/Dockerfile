@@ -13,7 +13,7 @@ RUN mkdir -p /cert_scripts/ /etc/letsencrypt/haproxy \
 COPY cert_scripts/* cert_scripts/
 
 RUN ln -s /cert_scripts/create_ss.sh /usr/local/bin/create_ss \
-    && ln -s /cert_scripts/get_le.sh /usr/local/bin/get_le
+    && ln -s /cert_scripts/get_le.sh /usr/local/bin/get_le \
     && ln -s /cert_scripts/recreate_certs.sh /usr/local/bin/recreate_certs
 
 COPY haproxy.cfg /usr/local/etc/haproxy/
